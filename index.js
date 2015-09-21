@@ -19,6 +19,3 @@ mongoose.connection.once('open', () => {
   //start koa app
   app.start();
 });
-
-
-

@@ -1,7 +1,8 @@
 'use strict';
 
 import koa from 'koa';
-import koaBody from 'koa-body';
+import body from 'koa-body';
+import validate from 'koa-validate';
 import routes from './routes/routes';
 import config from './config';
 
@@ -26,13 +27,17 @@ function start() {
   });
 
   // register body parser
-  app.use(koaBody());
+  app.use(body());
+
+  // register validator middleware
+  app.use(validate());
 
   // register routes
   app.use(routes.getRoutes());
 
   // used when accessing root or any unregistered end-point
   app.use(function *() {
+
     this.body = 'Tweet tweet... API root';
   });
 
